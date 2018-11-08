@@ -1,0 +1,1 @@
+En los casos 3 y 4 pudimos determinar que entraba en un ciclo infinito donde el robot iba por la orilla y nunca entraba al hielo por lo que no se pudo encontrar solucion al problema.
