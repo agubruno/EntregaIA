@@ -74,26 +74,10 @@ class RescateSobreHielo(SearchProblem):
     def heuristic(self, state):
         posicionRobot, hielosRotos, personas = state
         sumaMasAlta = 0
-        for p in personas:
-            if p[0] < (tamañoMapa - p[0]):
-                distanciaFila = p[0]
-            else:
-                distanciaFila = tamañoMapa - p[0]
-            if p[1] < (tamañoMapa - p[1]):
-                distanciaCol = p[1]
-            else:
-                distanciaCol = tamañoMapa - p[1]
-
-            if distanciaFila < distanciaCol:
-                distanciaMasCortaOrilla = distanciaFila
-            else:
-                distanciaMasCortaOrilla = distanciaCol
-
-            DistanciaRobotPersonaOrilla = distanciaMasCortaOrilla + self.manhattanRobotPersona(p, state)
-
-            if DistanciaRobotPersonaOrilla > sumaMasAlta:
-                sumaMasAlta = DistanciaRobotPersonaOrilla
-
+        for p in personas:      
+            Distancia = self.manhattanRobotPersona(p, state)
+            if Distancia > sumaMasAlta:
+                sumaMasAlta = Distancia
         return sumaMasAlta
 
            
@@ -110,22 +94,17 @@ def resolver(metodo_busqueda, posiciones_personas):
     if metodo_busqueda == 'astar':
         visor=BaseViewer()
         result = astar(RescateSobreHielo(state),graph_search=True, viewer=visor)
-
     elif metodo_busqueda =='breadth_first':
         visor=BaseViewer()
         result = breadth_first(RescateSobreHielo(state),graph_search=True, viewer=visor)
-
     elif metodo_busqueda =='depth_first':
         visor=BaseViewer()
         result = depth_first(RescateSobreHielo(state),graph_search=True,viewer=visor)
-        print(visor.stats)
-
     elif metodo_busqueda =='greedy':
         visor=BaseViewer()
         result = greedy(RescateSobreHielo(state),graph_search=True,viewer=visor)
-        print(visor.stats)
-
     return result
+
 
 
 """
